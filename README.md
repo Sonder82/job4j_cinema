@@ -8,9 +8,12 @@
 
 ## Стек технологий
 - Java 17
-- Spring Boot
-- Maven
+- Spring Boot 2.7.6
+- Maven 3.8
 - Git
+- PostgreSQL 14
+- Thymeleaf 
+- Bootstrap 5.2.3
 
 ## Требования к окружению
 - Java 17
@@ -18,7 +21,10 @@
 - PostgreSQL 14
 
 ## Сборка и запуск<br>
-- для сборки `mvn install`
-- для запуска `java -jar target/`
+- **Cоздать базу данных**
+ 
+ 'create database cinema'
+
 
 ## Контакты для связи<br>
+> Связаться со мной [TELEGRAM](https://t.me/AlekseyNovoselov/).
