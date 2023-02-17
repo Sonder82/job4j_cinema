@@ -3,7 +3,7 @@ package ru.job4j.cinema.model;
 import java.util.Objects;
 
 /**
- * Класс содержит модель описывающий файл
+ * Класс реализует модель файл.
  */
 public class File {
 

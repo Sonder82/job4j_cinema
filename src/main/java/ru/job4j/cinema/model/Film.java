@@ -1,8 +1,20 @@
 package ru.job4j.cinema.model;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class Film {
+
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "name", "name",
+            "year", "year",
+            "genre_id", "genreId",
+            "minimal_age", "minimalAge",
+            "duration_in_minutes", "durationInMinutes",
+            "file_id", "fileId"
+    );
+
     /**
      * поле id
      */
@@ -46,6 +58,9 @@ public class Film {
         this.minimalAge = minimalAge;
         this.durationInMinutes = durationInMinutes;
         this.fileId = fileId;
+    }
+
+    public Film() {
     }
 
     public int getId() {
