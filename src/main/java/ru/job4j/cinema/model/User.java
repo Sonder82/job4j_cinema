@@ -35,10 +35,10 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email, String fullName, String password) {
+    public User(int id, String fullName, String email, String password) {
         this.id = id;
-        this.email = email;
         this.fullName = fullName;
+        this.email = email;
         this.password = password;
     }
 
