@@ -2,6 +2,7 @@ package ru.job4j.cinema.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FileDto;
+import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.repository.FilmRepository;
 
@@ -22,18 +23,12 @@ public class SimpleFilmService implements FilmService {
 
     @Override
     public Film save(Film film, FileDto image) {
-        saveNewFile(film, image);
-        return filmRepository.save(film);
-    }
-
-    private void saveNewFile(Film film, FileDto image) {
-        var file = fileService.save(image);
-        film.setFileId(file.getId());
+        return null;
     }
 
     @Override
     public boolean deleteById(int id) {
-        Optional<Film> fileOptional = findById(id);
+        Optional<Film> fileOptional = filmRepository.findById(id);
         if (fileOptional.isEmpty()) {
             return false;
         }
@@ -44,25 +39,16 @@ public class SimpleFilmService implements FilmService {
 
     @Override
     public boolean update(Film film, FileDto image) {
-        boolean isNewFileEmpty = image.getContent().length == 0;
-        if (isNewFileEmpty) {
-            return filmRepository.update(film);
-        }
-        /* если передан новый не пустой файл, то старый удаляем, а новый сохраняем*/
-        int oldFileId = film.getFileId();
-        saveNewFile(film, image);
-        boolean isUpdated = filmRepository.update(film);
-        fileService.deleteById(oldFileId);
-        return isUpdated;
+        return false;
     }
 
     @Override
-    public Optional<Film> findById(int id) {
-        return filmRepository.findById(id);
+    public Optional<FilmDto> findById(int id) {
+        return Optional.empty();
     }
 
     @Override
-    public Collection<Film> findAll() {
-        return filmRepository.findAll();
+    public Collection<FilmDto> findAll() {
+        return null;
     }
 }
