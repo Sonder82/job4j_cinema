@@ -1,5 +1,9 @@
 package ru.job4j.cinema.dto;
 
+/**
+ * Класс создает DTO (Data Transfer Object).
+ * Цель отобразить файл
+ */
 public class FileDto {
 
     private String name;
