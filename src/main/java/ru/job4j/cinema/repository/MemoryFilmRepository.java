@@ -22,7 +22,7 @@ public class MemoryFilmRepository implements FilmRepository {
     private Map<Integer, Film> films = new ConcurrentHashMap<>();
 
     public MemoryFilmRepository() {
-        save(new Film(0, "Чебурашка", 2022, 1, 6, 120, 1));
+        save(new Film(0, "Чебурашка", "Фильм про Чебурашку", 2022, 1, 6, 120, 1));
     }
 
     /**
@@ -55,7 +55,7 @@ public class MemoryFilmRepository implements FilmRepository {
     @Override
     public boolean update(Film film) {
         return films.computeIfPresent(film.getId(), (id, oldFilm) -> new Film(
-                id, film.getName(), film.getYear(), film.getGenreId(), film.getMinimalAge(),
+                id, film.getName(), film.getDescription(), film.getYear(), film.getGenreId(), film.getMinimalAge(),
                 film.getDurationInMinutes(), film.getFileId())) != null;
     }
 

@@ -24,7 +24,10 @@ public class Film {
      * поле название фильма
      */
     private String name;
-
+    /**
+     * поле описание фильма
+     */
+    private String description;
     /**
      * поле год выпуска фильма
      */
@@ -50,9 +53,11 @@ public class Film {
      */
     private int fileId;
 
-    public Film(int id, String name, int year, int genreId, int minimalAge, int durationInMinutes, int fileId) {
+    public Film(int id, String name, String description, int year,
+                int genreId, int minimalAge, int durationInMinutes, int fileId) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.year = year;
         this.genreId = genreId;
         this.minimalAge = minimalAge;
@@ -62,6 +67,8 @@ public class Film {
 
     public Film() {
     }
+
+
 
     public int getId() {
         return id;
@@ -77,6 +84,14 @@ public class Film {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getYear() {
