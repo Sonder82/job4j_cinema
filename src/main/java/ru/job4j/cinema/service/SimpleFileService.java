@@ -1,5 +1,6 @@
 package ru.job4j.cinema.service;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FileDto;
@@ -12,20 +13,40 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Класс сервис для работы с файлами
+ */
+@ThreadSafe
 @Service
 public class SimpleFileService implements FileService {
 
+    /**
+     * поле объект fileRepository
+     */
     private final FileRepository fileRepository;
-
+    /**
+     * поле название директории хранилища файлов
+     */
     private final String storageDirectory;
 
-    public SimpleFileService(FileRepository fileRepository,
+    /**
+     * В конструкторе строка @Value("${file.directory}") String storageDirectory
+     * позволяет подставить на место storageDirectory значение из файла
+     * application.properties с ключом file.directory;
+     * @param sql2oFileRepository {@link FileRepository}
+     * @param storageDirectory директория хранилища файлов
+     */
+    public SimpleFileService(FileRepository sql2oFileRepository,
                              @Value("${file.directory}") String storageDirectory) {
-        this.fileRepository = fileRepository;
+        this.fileRepository = sql2oFileRepository;
         this.storageDirectory = storageDirectory;
         createStorageDirectory(storageDirectory);
     }
 
+    /**
+     * Метод создает директорию хранилища файлов
+     * @param path путь
+     */
     private void createStorageDirectory(String path) {
         try {
             Files.createDirectories(Path.of(path));
