@@ -72,7 +72,7 @@ public class SimpleFilmService implements FilmService {
      */
     private FilmDto convertToDto(Film film) {
         return new FilmDto(film.getId(), film.getName(), film.getDescription(), film.getYear(),
-                film.getMinimalAge(), film.getDurationInMinutes(), foundGenreName(film));
+                film.getMinimalAge(), film.getDurationInMinutes(), foundGenreName(film), film.getFileId());
     }
 
     /**

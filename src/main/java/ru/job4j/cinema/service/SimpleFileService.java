@@ -24,65 +24,9 @@ public class SimpleFileService implements FileService {
      * поле объект fileRepository
      */
     private final FileRepository fileRepository;
-    /**
-     * поле название директории хранилища файлов
-     */
-    private final String storageDirectory;
 
-    /**
-     * В конструкторе строка @Value("${file.directory}") String storageDirectory
-     * позволяет подставить на место storageDirectory значение из файла
-     * application.properties с ключом file.directory;
-     * @param sql2oFileRepository {@link FileRepository}
-     * @param storageDirectory директория хранилища файлов
-     */
-    public SimpleFileService(FileRepository sql2oFileRepository,
-                             @Value("${file.directory}") String storageDirectory) {
-        this.fileRepository = sql2oFileRepository;
-        this.storageDirectory = storageDirectory;
-        createStorageDirectory(storageDirectory);
-    }
-
-    /**
-     * Метод создает директорию хранилища файлов
-     * @param path путь
-     */
-    private void createStorageDirectory(String path) {
-        try {
-            Files.createDirectories(Path.of(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public File save(FileDto fileDto) {
-        String path = getNewFilePath(fileDto.getName());
-        writeFileBytes(path, fileDto.getContent());
-        return fileRepository.save(new File(fileDto.getName(), path));
-    }
-
-    /**
-     * Так создается уникальный путь для нового файла.
-     * UUID это просто рандомная строка определенного формата.
-     * @param sourceName имя файла Dto
-     * @return строка с указанием пути для нового файла.
-     */
-    private String getNewFilePath(String sourceName) {
-        return storageDirectory + java.io.File.separator + UUID.randomUUID() + sourceName;
-    }
-
-    /**
-     * Метод выполняет запись массива байтов(контент) по указанному пути.
-     * @param path путь
-     * @param content контент
-     */
-    private void writeFileBytes(String path, byte[] content) {
-        try {
-            Files.write(Path.of(path), content);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public SimpleFileService(FileRepository fileRepository) {
+        this.fileRepository = fileRepository;
     }
 
     @Override
@@ -103,28 +47,6 @@ public class SimpleFileService implements FileService {
     private byte[] readFileAsBytes(String path) {
         try {
             return Files.readAllBytes(Path.of(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public boolean deleteById(int id) {
-        Optional<File> fileOptional = fileRepository.findById(id);
-        if (fileOptional.isEmpty()) {
-            return false;
-        }
-        deleteFile(fileOptional.get().getPath());
-        return fileRepository.deleteById(id);
-    }
-
-    /**
-     * Метод выполняет удаление файла
-     * @param path путь файла
-     */
-    private void deleteFile(String path) {
-        try {
-            Files.deleteIfExists(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Класс контроллер для работы с пользователями.
  */
-@ThreadSafe
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
