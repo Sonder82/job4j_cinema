@@ -48,6 +48,9 @@ public class FilmSession {
      */
     private int price;
 
+    public FilmSession() {
+    }
+
     public FilmSession(int id, int filmId, int hallId, Timestamp startTime, Timestamp endTime, int price) {
         this.id = id;
         this.filmId = filmId;
