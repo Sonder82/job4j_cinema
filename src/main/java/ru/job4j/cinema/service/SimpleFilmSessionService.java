@@ -87,7 +87,7 @@ public class SimpleFilmSessionService implements FilmSessionService {
      */
     private FilmSessionDto convertToDto(FilmSession filmSession) {
         return new FilmSessionDto(filmSession.getId(), filmName(filmSession), hallName(filmSession),
-                filmSession.getStartTime(), filmSession.getEndTime(), filmSession.getPrice());
+                filmSession.getStartTime(), filmSession.getEndTime(), filmSession.getPrice(), filmSession.getHallId());
     }
 
     /**

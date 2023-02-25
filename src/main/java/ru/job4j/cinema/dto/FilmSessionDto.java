@@ -30,14 +30,20 @@ public class FilmSessionDto {
      * поле цена
      */
     private int price;
+    /**
+     * поле id кинозала
+     */
+    private int hallId;
 
-    public FilmSessionDto(int id, String filmName, String hallName, Timestamp startTime, Timestamp endTime, int price) {
+    public FilmSessionDto(int id, String filmName, String hallName, Timestamp startTime,
+                          Timestamp endTime, int price, int hallId) {
         this.id = id;
         this.filmName = filmName;
         this.hallName = hallName;
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;
+        this.hallId = hallId;
     }
 
     public int getId() {
@@ -86,5 +92,13 @@ public class FilmSessionDto {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getHallId() {
+        return hallId;
+    }
+
+    public void setHallId(int hallId) {
+        this.hallId = hallId;
     }
 }

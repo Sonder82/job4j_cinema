@@ -36,22 +36,4 @@ public class FilmSessionController {
         return "filmSessions/list";
     }
 
-    /**
-     * Метод извлекает киносеанс из репозитория и возвращает на страницу покупки билета
-     *
-     * @param model объект Model. Он используется Thymeleaf для поиска объектов, которые нужны отобразить на виде.
-     * @param id    id киносеанса
-     * @return строку с ошибкой или страницу с выбором киносеанса
-     */
-    @GetMapping("/{id}")
-    public String getByIdFilmSession(Model model, @PathVariable int id) {
-        Optional<FilmSessionDto> filmSessionOptional = filmSessionService.findById(id);
-        if (filmSessionOptional.isEmpty()) {
-            model.addAttribute("message", "Киносеанс с указанным идентификатором не найден");
-            return "errors/404";
-        }
-        var filmSession = filmSessionOptional.get();
-        model.addAttribute("filmSessions", filmSession);
-        return "redirect:/index";
-    }
 }
