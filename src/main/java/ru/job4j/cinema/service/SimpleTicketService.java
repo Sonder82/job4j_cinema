@@ -2,10 +2,16 @@ package ru.job4j.cinema.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
+import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.repository.FilmSessionRepository;
+import ru.job4j.cinema.repository.HallRepository;
 import ru.job4j.cinema.repository.TicketRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Класс сервис для работы с билетами
@@ -43,5 +49,15 @@ public class SimpleTicketService implements TicketService {
     @Override
     public Optional<Ticket> findBySessionIdRowAndPlace(int filmSessionId, int row, int place) {
         return ticketRepository.findBySessionIdRowAndPlace(filmSessionId, row, place);
+    }
+
+    @Override
+    public List<Integer> rowList(Optional<Hall> hall) {
+        return IntStream.range(1, hall.get().getRowCount()).boxed().collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Integer> placeList(Optional<Hall> hall) {
+        return IntStream.range(1, hall.get().getPlaceCount()).boxed().collect(Collectors.toList());
     }
 }

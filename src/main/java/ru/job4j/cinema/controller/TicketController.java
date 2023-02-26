@@ -51,15 +51,14 @@ public class TicketController {
             return "errors/404";
         }
 
-        var hallOptional = hallService.findById(filmSessionOptional.get().getHallId());
         var ticket = new Ticket();
         ticket.setSessionId(filmSessionOptional.get().getId());
-        var rowCounts = IntStream.range(1, 10).toArray();
-        var placeCounts = IntStream.range(1, 10).toArray();
+
+        var hallOptional = hallService.findById(filmSessionOptional.get().getHallId());
         model.addAttribute("filmSessions", filmSessionOptional.get());
         model.addAttribute("ticket", ticket);
-        model.addAttribute("rowCounts", rowCounts);
-        model.addAttribute("placeCounts", placeCounts);
+        model.addAttribute("rowCounts", ticketService.rowList(hallOptional));
+        model.addAttribute("placeCounts", ticketService.placeList(hallOptional));
         return "tickets/create";
     }
 

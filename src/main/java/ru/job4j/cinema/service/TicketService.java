@@ -1,5 +1,6 @@
 package ru.job4j.cinema.service;
 
+import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Ticket;
 
 import java.util.List;
@@ -11,4 +12,7 @@ public interface TicketService {
 
     Optional<Ticket> findBySessionIdRowAndPlace(int filmSessionId, int row, int place);
 
+    List<Integer> rowList(Optional<Hall> hall);
+
+    List<Integer> placeList(Optional<Hall> hall);
 }
