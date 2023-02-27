@@ -11,6 +11,7 @@ import ru.job4j.cinema.service.FilmSessionService;
 import ru.job4j.cinema.service.HallService;
 import ru.job4j.cinema.service.TicketService;
 
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -44,7 +45,7 @@ public class TicketController {
      * @return строку с ошибкой или страницу с выбором киносеанса
      */
     @GetMapping("/{id}")
-    public String getById(Model model, @PathVariable int id) {
+    public String getById(Model model, @PathVariable int id, HttpSession session) {
         Optional<FilmSessionDto> filmSessionOptional = filmSessionService.findById(id);
         if (filmSessionOptional.isEmpty()) {
             model.addAttribute("message", "Киносеанс с указанным идентификатором не найден");
@@ -53,6 +54,8 @@ public class TicketController {
 
         var ticket = new Ticket();
         ticket.setSessionId(filmSessionOptional.get().getId());
+        var user = (User) session.getAttribute("user");
+        ticket.setUserId(user.getId());
 
         var hallOptional = hallService.findById(filmSessionOptional.get().getHallId());
         model.addAttribute("filmSessions", filmSessionOptional.get());
