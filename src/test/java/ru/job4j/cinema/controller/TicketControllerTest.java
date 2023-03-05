@@ -47,7 +47,7 @@ class TicketControllerTest {
         var actualTicket = model.getAttribute("message");
 
         assertThat(view).isEqualTo("tickets/success");
-        assertThat(actualTicket).isEqualTo("Вы успешно приобрели билет на 10ряд10место.");
+        assertThat(actualTicket).isEqualTo("Вы успешно приобрели билет на 10 ряд 10 место.");
     }
 
     @Test

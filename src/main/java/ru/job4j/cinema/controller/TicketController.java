@@ -75,7 +75,7 @@ public class TicketController {
                 return "tickets/unsuccessful";
             }
             model.addAttribute("message", "Вы успешно приобрели билет на "
-                    + ticket.getRowNumber() + "ряд" + ticket.getPlaceNumber() + "место.");
+                    + ticket.getRowNumber() + " ряд " + ticket.getPlaceNumber() + " место.");
             return "tickets/success";
         } catch (Exception exception) {
             model.addAttribute("message", exception.getMessage());

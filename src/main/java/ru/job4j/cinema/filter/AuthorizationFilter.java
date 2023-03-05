@@ -32,7 +32,7 @@ public class AuthorizationFilter extends HttpFilter {
     }
 
     private boolean notPermitted(String uri) {
-        return uri.startsWith("/tickets/create");
+        return uri.startsWith("/tickets");
 
     }
 }
