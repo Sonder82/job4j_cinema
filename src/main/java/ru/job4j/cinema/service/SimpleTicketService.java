@@ -1,11 +1,8 @@
 package ru.job4j.cinema.service;
 
-import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.repository.FilmSessionRepository;
-import ru.job4j.cinema.repository.HallRepository;
 import ru.job4j.cinema.repository.TicketRepository;
 
 import java.util.List;
@@ -16,7 +13,6 @@ import java.util.stream.IntStream;
 /**
  * Класс сервис для работы с билетами
  */
-@ThreadSafe
 @Service
 public class SimpleTicketService implements TicketService {
 

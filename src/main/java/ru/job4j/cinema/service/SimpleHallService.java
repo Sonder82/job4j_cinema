@@ -1,6 +1,5 @@
 package ru.job4j.cinema.service;
 
-import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.repository.HallRepository;
@@ -11,7 +10,6 @@ import java.util.Optional;
 /**
  * Класс сервис для работы с кинозалами
  */
-@ThreadSafe
 @Service
 public class SimpleHallService implements HallService {
 

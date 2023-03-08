@@ -2,9 +2,6 @@ package ru.job4j.cinema.service;
 
 
 import org.springframework.stereotype.Service;
-import org.sql2o.Connection;
-import org.sql2o.Query;
-import org.sql2o.Sql2o;
 import ru.job4j.cinema.model.Genre;
 import ru.job4j.cinema.repository.GenreRepository;
 

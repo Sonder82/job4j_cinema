@@ -1,6 +1,5 @@
 package ru.job4j.cinema.service;
 
-import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FilmSessionDto;
 import ru.job4j.cinema.model.FilmSession;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 /**
  * Класс сервис для работы с киносеансами
  */
-@ThreadSafe
 @Service
 public class SimpleFilmSessionService implements FilmSessionService {
 
