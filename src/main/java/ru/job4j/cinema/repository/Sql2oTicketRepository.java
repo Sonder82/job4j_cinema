@@ -47,7 +47,7 @@ public class Sql2oTicketRepository implements TicketRepository {
         } catch (Sql2oException exception) {
             System.out.println("Error message: " + exception.getMessage());
         }
-        return Optional.empty();
+        return Optional.of(ticket);
     }
 
     /**
