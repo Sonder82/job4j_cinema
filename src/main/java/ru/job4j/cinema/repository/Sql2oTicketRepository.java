@@ -1,20 +1,17 @@
 package ru.job4j.cinema.repository;
 
-import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.model.User;
 
-import java.util.Collection;
 import java.util.Optional;
 
 /**
  * Класс репозиторий для работы с билетами.
  */
-@ThreadSafe
 @Repository
 public class Sql2oTicketRepository implements TicketRepository {
 
@@ -47,10 +44,10 @@ public class Sql2oTicketRepository implements TicketRepository {
                     .addParameter("userId", ticket.getUserId());
             int generatedId = query.executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
-            return Optional.of(ticket);
-        } catch (Exception e) {
-            return Optional.empty();
+        } catch (Sql2oException exception) {
+            System.out.println("Error message: " + exception.getMessage());
         }
+        return Optional.empty();
     }
 
     /**

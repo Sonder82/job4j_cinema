@@ -1,10 +1,10 @@
 package ru.job4j.cinema.repository;
 
-import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
 import ru.job4j.cinema.model.User;
 
 import java.util.Optional;
@@ -12,7 +12,6 @@ import java.util.Optional;
 /**
  * Класс репозиторий для работы с пользователями в базе данных
  */
-@ThreadSafe
 @Repository
 public class Sql2oUserRepository implements UserRepository {
 
@@ -38,10 +37,10 @@ public class Sql2oUserRepository implements UserRepository {
                     .addParameter("password", user.getPassword());
             int generatedId = query.executeUpdate().getKey(Integer.class);
             user.setId(generatedId);
-            return Optional.of(user);
-        } catch (Exception e) {
-            return Optional.empty();
+        } catch (Sql2oException exception) {
+            System.out.println("Error message: " + exception.getMessage());
         }
+        return Optional.of(user);
     }
 
     @Override
