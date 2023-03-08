@@ -44,10 +44,10 @@ class TicketControllerTest {
 
         var model = new ConcurrentModel();
         String view = ticketController.createTicket(ticket, model);
-        var actualTicket = model.getAttribute("message");
+        var actualTicket = ticketArgumentCaptor.getValue();
 
         assertThat(view).isEqualTo("tickets/success");
-        assertThat(actualTicket).isEqualTo("Вы успешно приобрели билет на 10 ряд 10 место.");
+        assertThat(actualTicket).isEqualTo(ticket);
     }
 
     @Test

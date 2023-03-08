@@ -1,6 +1,5 @@
 package ru.job4j.cinema.controller;
 
-import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +12,11 @@ import ru.job4j.cinema.service.TicketService;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 
 /**
  * Класс контроллер для работы с билетами.
  */
-@ThreadSafe
 @Controller
 @RequestMapping("/tickets")
 public class TicketController {
@@ -74,8 +71,7 @@ public class TicketController {
                         + "Вероятно оно уже занято. Перейдите на страницу бронирования билетов и попробуйте снова");
                 return "tickets/unsuccessful";
             }
-            model.addAttribute("message", "Вы успешно приобрели билет на "
-                    + ticket.getRowNumber() + " ряд " + ticket.getPlaceNumber() + " место.");
+            model.addAttribute("ticket", ticket);
             return "tickets/success";
         } catch (Exception exception) {
             model.addAttribute("message", exception.getMessage());
