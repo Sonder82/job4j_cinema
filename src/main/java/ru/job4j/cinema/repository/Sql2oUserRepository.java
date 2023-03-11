@@ -1,5 +1,7 @@
 package ru.job4j.cinema.repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Query;
@@ -15,6 +17,8 @@ import java.util.Optional;
 @Repository
 public class Sql2oUserRepository implements UserRepository {
 
+    private static final Logger LOG = LoggerFactory.getLogger(Sql2oUserRepository.class.getName());
+
     /**
      * поле экземпляр {@link Sql2o} для работы с базой данных.
      */
@@ -26,6 +30,7 @@ public class Sql2oUserRepository implements UserRepository {
 
     @Override
     public Optional<User> save(User user) {
+
         try (Connection connection = sql2o.open()) {
             String sql = """
                     INSERT INTO users(full_name, email, password)
@@ -38,7 +43,7 @@ public class Sql2oUserRepository implements UserRepository {
             int generatedId = query.executeUpdate().getKey(Integer.class);
             user.setId(generatedId);
         } catch (Sql2oException exception) {
-            System.out.println("Error message: " + exception.getMessage());
+            LOG.error("Error message: " + exception.getMessage());
         }
         return Optional.of(user);
     }
