@@ -49,7 +49,7 @@ public class Sql2oTicketRepository implements TicketRepository {
             int generatedId = query.executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
         } catch (Sql2oException exception) {
-            LOG.error("Error message: " + exception.getMessage());
+            LOG.error("Error message: " + exception.getMessage(), exception);
         }
         return Optional.of(ticket);
     }
